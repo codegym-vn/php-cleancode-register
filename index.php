@@ -26,27 +26,27 @@ if ($_SERVER["REQUEST_METHOD"] = "POST") {
     $Name = $_POST["name"];
     $Email = $_POST["Email"];
     $PhoneNumber = $_POST["PhoneNumber"];
-            if(empty($Name)||empty($PhoneNumber)||empty($Email)){
-            echo "empty . pls input";
-        }else if(!filter_var($Email, FILTER_VALIDATE_EMAIL)){
-            echo "mail wrong.input again";
-        }else{
-            if(file_exists('user.json')){
-                $valueJson = file_get_contents('user.json');
-                $converJsonArray = json_decode($valueJson,true);
-                $elementInput = array(
-                    'name'=>$Name,
-                    'email' => $Email,
-                    'phone'=>$PhoneNumber
-                );
-                array_push($converJsonArray,$elementInput);
-                $newFileJson = json_encode($converJsonArray);
-                file_put_contents('user.json',$newFileJson);
-                echo "input sucsesed";
-            }else{
-                echo "file json does not exit";
-            }
+    if (empty($Name) || empty($PhoneNumber) || empty($Email)) {
+        echo "empty . pls input";
+    } else if (!filter_var($Email, FILTER_VALIDATE_EMAIL)) {
+        echo "mail wrong.input again";
+    } else {
+        if (file_exists('user.json')) {
+            $valueJson = file_get_contents('user.json');
+            $converJsonArray = json_decode($valueJson, true);
+            $elementInput = array(
+                'name' => $Name,
+                'email' => $Email,
+                'phone' => $PhoneNumber
+            );
+            array_push($converJsonArray, $elementInput);
+            $newFileJson = json_encode($converJsonArray);
+            file_put_contents('user.json', $newFileJson);
+            echo "input sucsesed";
+        } else {
+            echo "file json does not exit";
         }
+    }
 }
 ?>
 </body>
